@@ -180,7 +180,17 @@ class Level:
                             print("Invalid Tile !")
     
     def render_fast(self, surface, camera):
-        pass
+        tileset = self.tilesets["collisions"]
+        for Y in range(camera.rect.top // TILE_SIZE, camera.rect.bottom // TILE_SIZE + 1):
+            for X in range(camera.rect.left // TILE_SIZE, camera.rect.right // TILE_SIZE + 1):
+                tile_pos = pygame.Vector2(X * TILE_SIZE, Y * TILE_SIZE)
+                if (X >= 0 and X < self.width) and (Y >= 0 and Y < self.height):
+                    ID = int(self.tilemap[Y][X])
+                    if (ID != -1):
+                        try:
+                            surface.blit(tileset[ID], tile_pos - camera.offset)
+                        except IndexError:
+                            continue
 
     def render_debug(self, surface, offset):
         for y in range(self.height):
@@ -196,7 +206,8 @@ class Level:
         """ Render all level layers and main collision tilemap in order (to create depth) """
         surface.blit(self.background, (-camera.position.x * self.parallalax_factor, -camera.position.y * self.parallalax_factor - 50))
         self.traps.render(surface, camera)
-        self.render_tilemap(surface, camera, self.tilemap, self.tilesets["collisions"])
+        self.render_fast(surface, camera)
+        #self.render_tilemap(surface, camera, self.tilemap, self.tilesets["collisions"])
         self.collectables.render(surface, camera)
 
         if self.game.debugMode:

@@ -6,7 +6,7 @@ __all__ = ["Collectable"]
 
 class Collectable(pygame.sprite.Sprite):
 
-    def __init__(self, animation, pos, anim_speed, hitsize=(0,0), tag="collectable"):
+    def __init__(self, animation, pos, anim_speed, hitsize=(0, 0), tag="collectable"):
         super().__init__()
         # Physics
         self.animation = animation
@@ -35,12 +35,14 @@ class Collectable(pygame.sprite.Sprite):
 
     def render(self, surface, offset, screen):
         if self.rect.colliderect(screen):
-            surface.blit(self.sprite, pygame.Vector2(self.rect.topleft) - offset)
- 
+            surface.blit(self.sprite, pygame.Vector2(
+                self.rect.topleft) - offset)
+
     def render_debug(self, surface, offset):
         # HitBox
-        hitbox = pygame.Rect(self.hitbox.x - offset.x, self.hitbox.y - offset.y, self.hitbox.w, self.hitbox.h)
-        pygame.draw.rect(surface, (255,0,0), hitbox, 1)
+        hitbox = pygame.Rect(self.hitbox.x - offset.x,
+                             self.hitbox.y - offset.y, self.hitbox.w, self.hitbox.h)
+        pygame.draw.rect(surface, (255, 0, 0), hitbox, 1)
 
     def destroy(self):
         self.kill()

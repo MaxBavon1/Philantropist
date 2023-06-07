@@ -1,4 +1,11 @@
 {
+    "player" : {
+        "speed" : 1,
+        "jumpForce" : 500,
+        "health" : 3,
+        "damage" : 1,
+        "anim_speed" : 16
+    },
     "zombie" : {
         "speed" : 1,
         "jumpForce" : 500,

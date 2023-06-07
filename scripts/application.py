@@ -47,7 +47,6 @@ assets.sprites["backgroundfinal2"] = pygame.transform.scale(assets.sprites["back
 assets.ui["volume_on"] = pygame.transform.scale_by(assets.ui["volume_on"], 3)
 assets.ui["volume_off"] = pygame.transform.scale_by(assets.ui["volume_off"], 3)
 data = Data()
-data.load_progress()
 data.load_game_data()
 Menu.init(window, clock, data, assets)
 
